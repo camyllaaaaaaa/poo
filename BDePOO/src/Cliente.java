@@ -1,8 +1,20 @@
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Cliente {
+    @Id
+	private int id;
+	private String data_de_nascimento;
+	private String nacionalidade;
+	private String nome;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_viagem")
+	private Viagem viagem;
+    
 	public Cliente(int id, String data_de_nascimento, String nacionalidade, String nome) {
 		super();
 		this.id = id;
@@ -10,11 +22,45 @@ public class Cliente {
 		this.nacionalidade = nacionalidade;
 		this.nome = nome;
 	}
-	  @Id
-	  private int id;
-      private String data_de_nascimento;
-      private String nacionalidade;
-      private String nome;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getData_de_nascimento() {
+		return data_de_nascimento;
+	}
+
+	public void setData_de_nascimento(String data_de_nascimento) {
+		this.data_de_nascimento = data_de_nascimento;
+	}
+
+	public String getNacionalidade() {
+		return nacionalidade;
+	}
+
+	public void setNacionalidade(String nacionalidade) {
+		this.nacionalidade = nacionalidade;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", data_de_nascimento=" + data_de_nascimento + ", nacionalidade=" + nacionalidade
+				+ ", nome=" + nome + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -25,6 +71,7 @@ public class Cliente {
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -53,34 +100,5 @@ public class Cliente {
 			return false;
 		return true;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getData_de_nascimento() {
-		return data_de_nascimento;
-	}
-	public void setData_de_nascimento(String data_de_nascimento) {
-		this.data_de_nascimento = data_de_nascimento;
-	}
-	public String getNacionalidade() {
-		return nacionalidade;
-	}
-	public void setNacionalidade(String nacionalidade) {
-		this.nacionalidade = nacionalidade;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	@Override
-	public String toString() {
-		return "Cliente [id=" + id + ", data_de_nascimento=" + data_de_nascimento + ", nacionalidade=" + nacionalidade
-				+ ", nome=" + nome + "]";
-	}
-      
+	
 }

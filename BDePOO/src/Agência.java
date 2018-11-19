@@ -1,20 +1,31 @@
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Agência {
-		public Agência(int id, String nome, String viagem, String endereço) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.viagem = viagem;
-		this.endereço = endereço;
-	}
 		@Id
 		private int id; 
 		private String nome;
 		private String viagem;
 		private String endereço;
+		
+		@ManyToOne
+	    @JoinColumn(name="id_viagem")
+	    private Viagem viagem1;
+	    
+	    @ManyToMany
+	    @JoinTable(
+	  		  name = "agência_cliente",
+	  		  joinColumns = @JoinColumn(name = "agência_id"),
+	  		  inverseJoinColumns = @JoinColumn(name = "cliente_id"))
+	    private Set<Cliente> cliente;
+	  		  
 		public int getId() {
 			return id;
 		}
@@ -39,9 +50,13 @@ public class Agência {
 		public void setEndereço(String endereço) {
 			this.endereço = endereço;
 		}
-		@Override
-		public String toString() {
-			return "Agência [id=" + id + ", nome=" + nome + ", viagem=" + viagem + ", endereço=" + endereço + "]";
+		
+		public Agência(int id, String nome, String viagem, String endereço) {
+			super();
+			this.id = id;
+			this.nome = nome;
+			this.viagem = viagem;
+			this.endereço = endereço;
 		}
 		@Override
 		public int hashCode() {
@@ -80,5 +95,9 @@ public class Agência {
 			} else if (!viagem.equals(other.viagem))
 				return false;
 			return true;
+		}
+		@Override
+		public String toString() {
+			return "Agência [id=" + id + ", nome=" + nome + ", viagem=" + viagem + ", endereço=" + endereço + "]";
 		}
 }

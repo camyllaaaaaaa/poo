@@ -1,8 +1,12 @@
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-    public class Quartos {
+    public class Quarto {
 	@Id
 	private int id;
 	private String standard;
@@ -10,6 +14,11 @@ import javax.persistence.Id;
 	private String suite_master;
 	private String suite_confort;
 	private String superior_com_hidro;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_hotel")
+	private Set<Hotel> hoteis;
+	
 	public int getId() {
 		return id;
 	}
@@ -46,13 +55,7 @@ import javax.persistence.Id;
 	public void setSuperior_com_hidro(String superior_com_hidro) {
 		this.superior_com_hidro = superior_com_hidro;
 	}
-	@Override
-	public String toString() {
-		return "Quartos [id=" + id + ", standard=" + standard + ", suite_exclusiva=" + suite_exclusiva
-				+ ", suite_master=" + suite_master + ", suite_confort=" + suite_confort + ", superior_com_hidro="
-				+ superior_com_hidro + "]";
-	}
-	public Quartos(int id, String standard, String suite_exclusiva, String suite_master, String suite_confort,
+	public Quarto(int id, String standard, String suite_exclusiva, String suite_master, String suite_confort,
 			String superior_com_hidro) {
 		super();
 		this.id = id;
@@ -82,7 +85,7 @@ import javax.persistence.Id;
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Quartos other = (Quartos) obj;
+		Quarto other = (Quarto) obj;
 		if (id != other.id)
 			return false;
 		if (standard == null) {
@@ -112,6 +115,16 @@ import javax.persistence.Id;
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Quarto [id=" + id + ", standard=" + standard + ", suite_exclusiva=" + suite_exclusiva
+				+ ", suite_master=" + suite_master + ", suite_confort=" + suite_confort + ", superior_com_hidro="
+				+ superior_com_hidro + "]";
+	}
 	
- }
- 
+
+}
+
+	
+
+	

@@ -1,5 +1,11 @@
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Passagem {
@@ -8,6 +14,18 @@ public class Passagem {
 	private String hora_de_chegada;
 	private String valor;
 	private String hora_de_saída;
+	
+	@ManyToOne
+    @JoinColumn(name="id_aeroporto")
+    private Aeroporto aeroporto;
+    
+    @ManyToMany
+    @JoinTable(
+  		  name = "passagem_cliente",
+  		  joinColumns = @JoinColumn(name = "passagem_id"),
+  		  inverseJoinColumns = @JoinColumn(name = "cliente_id"))
+    private Set<Cliente> cliente;
+	
 	public int getId() {
 		return id;
 	}
@@ -82,6 +100,6 @@ public class Passagem {
 			return false;
 		return true;
 	}
-	
+
  }
 
